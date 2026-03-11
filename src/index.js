@@ -97,7 +97,7 @@ async function handleStream(env, ctx, messages, maxTokens, msgId, reqModel) {
           if (raw === '[DONE]') continue;
           try {
             const parsed = JSON.parse(raw);
-            const text = parsed.choices?.[0]?.delta?.content;
+            const text = parsed.response ?? parsed.choices?.[0]?.delta?.content;
             if (text) {
               outputTokens++;
               await send('content_block_delta', {
